@@ -1,9 +1,7 @@
 package web.models;
 
-import org.springframework.stereotype.Component;
+import java.util.Objects;
 
-
-@Component
 public class Car {
     private String model;
     private int year;
@@ -48,5 +46,18 @@ public class Car {
                 ", year=" + year +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return year == car.year && Objects.equals(model, car.model) && Objects.equals(color, car.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(model, year, color);
     }
 }
